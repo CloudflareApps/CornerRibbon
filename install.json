@@ -3,11 +3,11 @@
     "head": [
       {
         "type": "style",
-        "src": "ribbon.css"
+        "src": "corner-ribbon.css"
       },
       {
         "type": "script",
-        "src": "ribbon.js"
+        "src": "corner-ribbon.js"
       }
     ]
   },
