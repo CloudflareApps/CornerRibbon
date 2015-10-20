@@ -4,7 +4,8 @@
 			{
 				"type": "style",
 				"src": "ribbon.css"
-			},{
+			},
+			{
 				"type": "script",
 				"src": "ribbon.js"
 			}
@@ -18,14 +19,14 @@
 				"type": "string",
 				"default": "Ribbon text"
 			},
-			"text-color": {
+			"color": {
 				"order": 2,
 				"title": "Text color",
 				"type": "string",
 				"format": "color",
 				"default": "auto"
 			},
-			"ribbon-color": {
+			"backgroundColor": {
 				"order": 3,
 				"title": "Ribbon color",
 				"type": "string",
@@ -58,7 +59,7 @@
 				"format": "radios",
 				"default": "top-right"
 			},
-			"font-size": {
+			"fontSize": {
 				"order": 6,
 				"title": "Font size",
 				"type": "string",
@@ -76,13 +77,13 @@
 				},
 				"default": "normal"
 			},
-			"link": {
+			"href": {
 				"order": 7,
 				"title": "Link URL",
 				"type": "string",
 				"description": "Link to send to (Optional)."
 			},
-			"new_tab": {
+			"targetBlank": {
 				"order": 8,
 				"title": "Open link in new tab",
 				"type": "boolean",

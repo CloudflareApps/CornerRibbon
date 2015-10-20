@@ -1,118 +1,145 @@
 (function () {
-	var ready = function (fn) {
-		if (document.readyState !== 'loading') {
-			fn();
-		} else {
-			document.addEventListener('DOMContentLoaded', fn);
-		}
-	};
+  var ready, options, getMaxZIndex, canvas, context, getTextWidth, measureText;
 
-	INSTALL_OPTIONS['width'] = Math.max(Math.min(INSTALL_OPTIONS['width'], 500), 200);
-	var positionParts = INSTALL_OPTIONS['position'].split('-');
+  options = INSTALL_OPTIONS;
 
-	ready(function () {
-		var sqrt2 = Math.sqrt(2), ribbon;
-		if(INSTALL_OPTIONS['link']) {
-			ribbon = document.createElement("a");
-			ribbon.setAttribute('href', INSTALL_OPTIONS['link']);
-			if(INSTALL_OPTIONS['new_tab']) {
-				ribbon.setAttribute('target', '_blank');
-			}
-		} else {
-			ribbon = document.createElement("div");
-		}
-		ribbon.innerHTML = INSTALL_OPTIONS['text'];
-		ribbon.setAttribute('class', 'corner-ribbon');
-		ribbon.setAttribute('style', 'width: ' + (parseInt(INSTALL_OPTIONS['width']) * sqrt2) + 'px; color: ' + INSTALL_OPTIONS['text-color'] + '; background-color: ' + INSTALL_OPTIONS['ribbon-color'] + ';');
-		var ribbonWrapper = document.createElement("div");
-		ribbonWrapper.setAttribute('class', 'corner-ribbon-wrapper ' + INSTALL_OPTIONS['position'] + ' ' + INSTALL_OPTIONS['font-size']);
-		ribbonWrapper.setAttribute('style', 'z-index: ' + (getMaxZIndex() + 1) + '; width: ' + INSTALL_OPTIONS['width'] + 'px; height: ' + INSTALL_OPTIONS['width'] + 'px;');
-		ribbonWrapper.appendChild(ribbon);
-		document.body.appendChild(ribbonWrapper);
-		var s = window.getComputedStyle(ribbonWrapper, null);
-		var font = s.getPropertyValue("font-size") + " " + s.getPropertyValue("font-family");
-		var words = [];
-		INSTALL_OPTIONS['text'].split(' ').forEach(function (word) {
-			words.push({text: word, width: getTextWidth(word, font)});
-		});
-		var textSize = measureText(INSTALL_OPTIONS['text'], s.getPropertyValue("font-size"), '');
-		var rowCount = Math.ceil(textSize.width / INSTALL_OPTIONS['width']),
-			rowWidth = 0, row = [], rows = [], word = 0;
-		while(rows.length < rowCount && word < words.length) {
-			if( rowWidth + words[word].width  >= INSTALL_OPTIONS['width'] - (positionParts[0] === 'top' ? rowCount - rows.length : rows.length) * 2 * textSize.height
-				&& (rows.length + 1) * textSize.height + 20 < INSTALL_OPTIONS['width']) {
-				rows.push(row.join(' '));
-				rowWidth = 0;
-				row = [];
-			}
-			rowWidth += words[word].width;
-			row.push(words[word].text);
-			word++;
-		}
-		if(row.length) {
-			if(rows.length < rowCount && (rows.length + 1) * textSize.height + 20 < INSTALL_OPTIONS['width']) {
-				rows.push(row.join(' '));
-			} else {
-				rows[rows.length - 1] += ' ...';
-			}
-		}
-		ribbon.innerHTML = rows.join('<br />');
-		
-		var deviation = ((ribbon.clientWidth / 2 + ribbon.clientHeight / 2) / sqrt2) - ribbon.clientHeight * sqrt2;
-		if(positionParts[0] === 'top') {
-			ribbon.style.top = deviation + 'px';
-		} else {
-			ribbon.style.bottom = deviation + 'px';
-		}
-		if(positionParts[1] === 'right') {
-			ribbon.style.right = (((INSTALL_OPTIONS['width'] - 1000) / 1000) * deviation - ribbon.clientHeight * sqrt2 / 2).toFixed(2) + 'px';
-		} else {
-			ribbon.style.left = (((INSTALL_OPTIONS['width'] - 1000) / 1000) * deviation - ribbon.clientHeight * sqrt2 / 2).toFixed(2) + 'px';
-		}
-	});
+  ready = function (fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  };
 
-	function getTextWidth(text, font) {
-		var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-		var context = canvas.getContext("2d");
-		context.font = font;
-		var metrics = context.measureText(text);
-		return metrics.width;
-	}
+  getMaxZIndex = function () {
+    var zIndex, max, allEls, totalEls, i;
 
-	function measureText(pText, pFontSize, pStyle) {
-		var lDiv = document.createElement('lDiv');
+    max = 0;
+    allEls = document.getElementsByTagName('*');
+    totalEls = allEls.length;
 
-		document.body.appendChild(lDiv);
+    for (i = 0, i < totalEls; i++) {
+      zIndex = parseInt(document.defaultView.getComputedStyle(allEls[i]).zIndex, 10);
+      max = zIndex ? Math.max(max, zIndex) : max;
+    }
 
-		if (pStyle != null) {
-			lDiv.style = pStyle;
-		}
-		lDiv.style.fontSize = "" + pFontSize + "px";
-		lDiv.style.position = "absolute";
-		lDiv.style.left = -1000;
-		lDiv.style.top = -1000;
+    return max;
+  };
 
-		lDiv.innerHTML = pText;
+  canvas = document.createElement('canvas');
+  context = canvas.getContext('2d');
+  getTextWidth = function(text, font) {
+    var metrics
+    context.font = font;
+    return context.measureText(text).width;
+  };
 
-		var lResult = {
-			width: lDiv.clientWidth,
-			height: lDiv.clientHeight
-		};
+  measureText = function(text, fontSize) {
+    var div, result;
 
-		document.body.removeChild(lDiv);
-		lDiv = null;
+    div = document.createElement('div');
+    document.body.appendChild(div);
 
-		return lResult;
-	}
+    div.style.fontSize = fontSize + 'px';
+    div.style.position = 'absolute';
+    div.style.left = -1000;
+    div.style.top = -1000;
 
-	var getMaxZIndex = function () {
-		var zIndex, maxZ = 0,
-			all = document.getElementsByTagName('*');
-		for (var i = 0, n = all.length; i < n; i++) {
-			zIndex = document.defaultView.getComputedStyle(all[i], null).getPropertyValue("z-index");
-			zIndex = parseInt(zIndex, 10);
-			maxZ = (zIndex) ? Math.max(maxZ, zIndex) : maxZ;
-		}
-		return maxZ;
-	};
+    div.innerHTML = text;
+
+    result = {
+      width: div.clientWidth,
+      height: div.clientHeight
+    };
+
+    document.body.removeChild(div);
+    div = null;
+    return result;
+  };
+
+  options.width = Math.max(Math.min(options.width, 500), 200);
+
+  position = {};
+  position.top = options.position.split('-')[0] === 'top';
+  position.bottom = !position.top;
+  position.left = options.position.split('-')[1] === 'left';
+  position.right = !position.left;
+
+  ready(function(){
+    var sqrt2, ribbon, ribbonContent, computedStyle, words, textSize, rowCount, rowWidth, row, rows, word, deviation;
+
+    sqrt2 = Math.sqrt(2);
+
+    if (options.href) {
+      ribbonContent = document.createElement('a');
+      ribbonContent.setAttribute('href', options.href);
+      if (options.targetBlank) {
+        ribbonContent.setAttribute('target', '_blank');
+      }
+    } else {
+      ribbonContent = document.createElement('div');
+    }
+
+    ribbon = document.createElement('div');
+    ribbon.setAttribute('class', 'corner-ribbon corner-ribbon-position-' + options.position + ' corner-ribbon-font-size-' + options.fontSize);
+    ribbon.setAttribute('style', 'z-index: ' + (getMaxZIndex() + 1) + '; width: ' + options.width + 'px; height: ' + options.width + 'px;');
+    document.body.appendChild(ribbon);
+
+    ribbonContent.innerHTML = options.text;
+    ribbonContent.setAttribute('class', 'corner-ribbon-content');
+    ribbonContent.setAttribute('style', 'width: ' + (parseInt(options.width) * sqrt2) + 'px; color: ' + options.color + '; background-color: ' + options.backgroundColor + ';');
+    ribbon.appendChild(ribbonContent);
+
+    computedStyle = window.getComputedStyle(ribbon);
+
+    words = [];
+    options.text.split(' ').forEach(function (word) {
+      words.push({
+        text: word,
+        width: getTextWidth(word, computedStyle.fontSize + ' ' + computedStyle.fontFamily)
+      });
+    });
+
+    textSize = measureText(options.text, s.getPropertyValue('font-size'));
+
+    rowCount = Math.ceil(textSize.width / options.width);
+    rowWidth = 0;
+    row = [];
+    rows = [];
+    word = 0;
+
+    while (rows.length < rowCount && word < words.length) {
+      if (rowWidth + words[word].width >= options.width - (position.top ? rowCount - rows.length : rows.length) * 2 * textSize.height && (rows.length + 1) * textSize.height + 20 < options.width) {
+        rows.push(row.join(' '));
+        rowWidth = 0;
+        row = [];
+      }
+      rowWidth += words[word].width;
+      row.push(words[word].text);
+      word++;
+    }
+
+    if (row.length) {
+      if (rows.length < rowCount && (rows.length + 1) * textSize.height + 20 < options.width) {
+        rows.push(row.join(' '));
+      } else {
+        rows[rows.length - 1] += '...';
+      }
+    }
+    ribbonContent.innerHTML = rows.join('<br>');
+
+    deviation = {};
+    deviation.vertical = ((ribbonContent.clientWidth / 2 + ribbonContent.clientHeight / 2) / sqrt2) - ribbonContent.clientHeight * sqrt2;
+    deviation.hoziontal = (((options.width - 1000) / 1000) * deviation - ribbonContent.clientHeight * sqrt2 / 2).toFixed(2);
+    if (position.top) {
+      ribbonContent.style.top = deviation.vertical + 'px';
+    } else {
+      ribbonContent.style.bottom = deviation.vertical + 'px';
+    }
+    if (position.right) {
+      ribbonContent.style.right = deviation.hoziontal + 'px';
+    } else {
+      ribbonContent.style.left = deviation.hoziontal + 'px';
+    }
+  });
 })();
