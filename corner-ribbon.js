@@ -63,8 +63,6 @@
     ribbonContent.style.color = options.color;
     ribbonContent.style.backgroundColor = options.backgroundColor;
     ribbon.appendChild(ribbonContent);
-
-    computedStyle = window.getComputedStyle(ribbon);
   };
 
   ready(update);
