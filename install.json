@@ -52,8 +52,8 @@
         "title": "Ribbon color",
         "type": "string",
         "format": "color",
-        "placeholder": "#000000",
-        "default": "#e43800"
+        "placeholder": "#ee4433",
+        "default": "#ee4433"
       },
       "position": {
         "order": 7,
