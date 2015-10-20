@@ -17,31 +17,46 @@
         "order": 1,
         "title": "Text",
         "type": "string",
-        "default": "Ribbon text"
+        "placeholder": "Check this out!",
+        "default": "Check this out!"
+      },
+      "href": {
+        "order": 2,
+        "title": "URL",
+        "type": "string",
+        "placeholder": "http://example.com",
+        "description": "Optionally make the ribbon a clickable link."
+      },
+      "targetBlank": {
+        "showIf": {
+          "href": {
+            "op": "!=",
+            "value": ""
+          }
+        },
+        "order": 3,
+        "title": "Open link in new tab",
+        "type": "boolean",
+        "default": false
       },
       "color": {
-        "order": 2,
+        "order": 5,
         "title": "Text color",
         "type": "string",
         "format": "color",
-        "default": "auto"
+        "placeholder": "#ffffff",
+        "default": "#ffffff"
       },
       "backgroundColor": {
-        "order": 3,
+        "order": 6,
         "title": "Ribbon color",
         "type": "string",
         "format": "color",
-        "default": "auto"
-      },
-      "width": {
-        "order": 4,
-        "title": "Ribbon width",
-        "type": "integer",
-        "description": "Enter a value in pixels between 200 and 500.",
-        "default": "200"
+        "placeholder": "#000000",
+        "default": "#e43800"
       },
       "position": {
-        "order": 5,
+        "order": 7,
         "title": "Position",
         "type": "string",
         "enum": [
@@ -51,16 +66,24 @@
           "bottom-right"
         ],
         "enumNames": {
-          "top-left": "Top left",
-          "top-right": "Top right",
-          "bottom-left": "Bottom left",
-          "bottom-right": "Bottom right"
+          "top-left": "Top left corner",
+          "top-right": "Top right corner",
+          "bottom-left": "Bottom left corner",
+          "bottom-right": "Bottom right corner"
         },
         "format": "radios",
         "default": "top-right"
       },
+      "width": {
+        "order": 8,
+        "title": "Width",
+        "type": "integer",
+        "description": "Enter a value between <code class=\"inline\">200</code> and <code class=\"inline\">500</code>. (Unit is <code class=\"inline\">px</code>.)",
+        "placeholder": 350,
+        "default": 350
+      },
       "fontSize": {
-        "order": 6,
+        "order": 9,
         "title": "Font size",
         "type": "string",
         "enum": [
@@ -76,18 +99,6 @@
           "huge": "Huge"
         },
         "default": "normal"
-      },
-      "href": {
-        "order": 7,
-        "title": "Link URL",
-        "type": "string",
-        "description": "Link to send to (Optional)."
-      },
-      "targetBlank": {
-        "order": 8,
-        "title": "Open link in new tab",
-        "type": "boolean",
-        "default": false
       }
     }
   }
