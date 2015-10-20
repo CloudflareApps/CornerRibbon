@@ -23,7 +23,8 @@
   transform: rotate(-45deg)
 }
 
-.corner-ribbon.top-right .corner-ribbon, .corner-ribbon.bottom-left .corner-ribbon {
+.corner-ribbon.corner-ribbon-position-top-right .corner-ribbon-content,
+.corner-ribbon.corner-ribbon-position-bottom-left .corner-ribbon-content {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg)
 }

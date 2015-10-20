@@ -18,7 +18,7 @@
     allEls = document.getElementsByTagName('*');
     totalEls = allEls.length;
 
-    for (i = 0, i < totalEls; i++) {
+    for (i = 0; i < totalEls; i++) {
       zIndex = parseInt(document.defaultView.getComputedStyle(allEls[i]).zIndex, 10);
       max = zIndex ? Math.max(max, zIndex) : max;
     }
@@ -100,7 +100,7 @@
       });
     });
 
-    textSize = measureText(options.text, s.getPropertyValue('font-size'));
+    textSize = measureText(options.text, computedStyle.getPropertyValue('font-size'));
 
     rowCount = Math.ceil(textSize.width / options.width);
     rowWidth = 0;
@@ -109,7 +109,7 @@
     word = 0;
 
     while (rows.length < rowCount && word < words.length) {
-      if (rowWidth + words[word].width >= options.width - (position.top ? rowCount - rows.length : rows.length) * 2 * textSize.height && (rows.length + 1) * textSize.height + 20 < options.width) {
+      if (rowWidth + words[word].width >= options.width - (position.top ? rowCount - rows.length : rows.length) * 2 * textSize.height && (rows.length + 1) * textSize.height < options.width) {
         rows.push(row.join(' '));
         rowWidth = 0;
         row = [];
@@ -120,7 +120,7 @@
     }
 
     if (row.length) {
-      if (rows.length < rowCount && (rows.length + 1) * textSize.height + 20 < options.width) {
+      if (rows.length < rowCount && (rows.length + 1) * textSize.height < options.width) {
         rows.push(row.join(' '));
       } else {
         rows[rows.length - 1] += '...';
