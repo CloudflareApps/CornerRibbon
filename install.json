@@ -78,9 +78,9 @@
         "order": 8,
         "title": "Width",
         "type": "integer",
-        "description": "Enter a value between <code class=\"inline\">200</code> and <code class=\"inline\">500</code>. (Unit is <code class=\"inline\">px</code>.)",
-        "placeholder": 350,
-        "default": 350
+        "description": "Enter a value between <code class=\"inline\">100</code> and <code class=\"inline\">500</code>. (Unit is <code class=\"inline\">px</code>.)",
+        "placeholder": 180,
+        "default": 180
       },
       "fontSize": {
         "order": 9,
