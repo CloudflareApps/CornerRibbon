@@ -1,7 +1,6 @@
 .corner-ribbon {
   pointer-events: none;
-  position: fixed;
-  overflow: hidden;
+  position: fixed
 }
 
 .corner-ribbon .corner-ribbon-content {
