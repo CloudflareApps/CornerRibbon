@@ -11,6 +11,14 @@
       }
     ]
   },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "CornerRibbon.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  },
   "options": {
     "properties": {
       "text": {

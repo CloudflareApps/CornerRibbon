@@ -1,5 +1,5 @@
 (function () {
-  var options, ready, getMaxZIndex;
+  var ribbon, options, ready, getMaxZIndex, setOptions, update;
 
   options = INSTALL_OPTIONS;
 
@@ -26,10 +26,16 @@
     return max;
   };
 
-  options.width = Math.max(Math.min(options.width, 500), 100);
+  setOptions = function(opts) {
+    options = opts;
 
-  ready(function(){
-    var ribbon, ribbonContent;
+    update();
+  };
+
+  update = function() {
+    var ribbonContent;
+
+    options.width = Math.max(Math.min(options.width, 500), 100);
 
     if (options.href) {
       ribbonContent = document.createElement('a');
@@ -41,11 +47,16 @@
       ribbonContent = document.createElement('div');
     }
 
-    ribbon = document.createElement('div');
+    if (!ribbon) {
+      ribbon = document.createElement('div');
+      document.body.appendChild(ribbon);
+    } else {
+      ribbon.innerHTML = '';
+    }
+
     ribbon.className = 'corner-ribbon corner-ribbon-position-' + options.position + ' corner-ribbon-font-size-' + options.fontSize;
     ribbon.style.zIndex = getMaxZIndex() + 1;
     ribbon.style.width = ribbon.style.height = options.width + 'px';
-    document.body.appendChild(ribbon);
 
     ribbonContent.innerHTML = options.text;
     ribbonContent.className = 'corner-ribbon-content';
@@ -54,5 +65,11 @@
     ribbon.appendChild(ribbonContent);
 
     computedStyle = window.getComputedStyle(ribbon);
-  });
+  };
+
+  ready(update);
+
+  window.CornerRibbon = {
+    setOptions: setOptions
+  };
 })();
