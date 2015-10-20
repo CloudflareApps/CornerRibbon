@@ -1,94 +1,94 @@
 {
-	"resources": {
-		"head": [
-			{
-				"type": "style",
-				"src": "ribbon.css"
-			},
-			{
-				"type": "script",
-				"src": "ribbon.js"
-			}
-		]
-	},
-	"options": {
-		"properties": {
-			"text": {
-				"order": 1,
-				"title": "Text",
-				"type": "string",
-				"default": "Ribbon text"
-			},
-			"color": {
-				"order": 2,
-				"title": "Text color",
-				"type": "string",
-				"format": "color",
-				"default": "auto"
-			},
-			"backgroundColor": {
-				"order": 3,
-				"title": "Ribbon color",
-				"type": "string",
-				"format": "color",
-				"default": "auto"
-			},
-			"width": {
-				"order": 4,
-				"title": "Ribbon width",
-				"type": "integer",
-				"description": "Enter a value in pixels between 200 and 500.",
-				"default": "200"
-			},
-			"position": {
-				"order": 5,
-				"title": "Position",
-				"type": "string",
-				"enum": [
-					"top-left",
-					"top-right",
-					"bottom-left",
-					"bottom-right"
-				],
-				"enumNames": {
-					"top-left": "Top left",
-					"top-right": "Top right",
-					"bottom-left": "Bottom left",
-					"bottom-right": "Bottom right"
-				},
-				"format": "radios",
-				"default": "top-right"
-			},
-			"fontSize": {
-				"order": 6,
-				"title": "Font size",
-				"type": "string",
-				"enum": [
-					"small",
-					"normal",
-					"large",
-					"huge"
-				],
-				"enumNames": {
-					"small": "Small",
-					"normal": "Normal",
-					"large": "Large",
-					"huge": "Huge"
-				},
-				"default": "normal"
-			},
-			"href": {
-				"order": 7,
-				"title": "Link URL",
-				"type": "string",
-				"description": "Link to send to (Optional)."
-			},
-			"targetBlank": {
-				"order": 8,
-				"title": "Open link in new tab",
-				"type": "boolean",
-				"default": false
-			}
-		}
-	}
+  "resources": {
+    "head": [
+      {
+        "type": "style",
+        "src": "ribbon.css"
+      },
+      {
+        "type": "script",
+        "src": "ribbon.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "text": {
+        "order": 1,
+        "title": "Text",
+        "type": "string",
+        "default": "Ribbon text"
+      },
+      "color": {
+        "order": 2,
+        "title": "Text color",
+        "type": "string",
+        "format": "color",
+        "default": "auto"
+      },
+      "backgroundColor": {
+        "order": 3,
+        "title": "Ribbon color",
+        "type": "string",
+        "format": "color",
+        "default": "auto"
+      },
+      "width": {
+        "order": 4,
+        "title": "Ribbon width",
+        "type": "integer",
+        "description": "Enter a value in pixels between 200 and 500.",
+        "default": "200"
+      },
+      "position": {
+        "order": 5,
+        "title": "Position",
+        "type": "string",
+        "enum": [
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "enumNames": {
+          "top-left": "Top left",
+          "top-right": "Top right",
+          "bottom-left": "Bottom left",
+          "bottom-right": "Bottom right"
+        },
+        "format": "radios",
+        "default": "top-right"
+      },
+      "fontSize": {
+        "order": 6,
+        "title": "Font size",
+        "type": "string",
+        "enum": [
+          "small",
+          "normal",
+          "large",
+          "huge"
+        ],
+        "enumNames": {
+          "small": "Small",
+          "normal": "Normal",
+          "large": "Large",
+          "huge": "Huge"
+        },
+        "default": "normal"
+      },
+      "href": {
+        "order": 7,
+        "title": "Link URL",
+        "type": "string",
+        "description": "Link to send to (Optional)."
+      },
+      "targetBlank": {
+        "order": 8,
+        "title": "Open link in new tab",
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
 }
