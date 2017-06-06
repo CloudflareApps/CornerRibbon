@@ -3,11 +3,11 @@
     "head": [
       {
         "type": "style",
-        "src": "corner-ribbon.css"
+        "src": "./source/app.css"
       },
       {
         "type": "script",
-        "src": "corner-ribbon.js"
+        "src": "./source/app.js"
       }
     ]
   },
@@ -15,7 +15,7 @@
     "handlers": [
       {
         "options": ["*"],
-        "execute": "CornerRibbon.setOptions(INSTALL_OPTIONS)"
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
       }
     ]
   },
@@ -25,14 +25,13 @@
         "order": 1,
         "title": "Text",
         "type": "string",
-        "placeholder": "Check this out!",
         "default": "Check this out!"
       },
       "href": {
         "order": 2,
         "title": "URL",
         "type": "string",
-        "placeholder": "http://example.com",
+        "placeholder": "https://...",
         "description": "Optionally make the ribbon a clickable link."
       },
       "targetBlank": {
@@ -60,8 +59,7 @@
         "title": "Ribbon color",
         "type": "string",
         "format": "color",
-        "placeholder": "#ee4433",
-        "default": "#ee4433"
+        "default": "#f38020"
       },
       "position": {
         "order": 7,

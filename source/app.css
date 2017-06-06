@@ -1,0 +1,99 @@
+cloudflare-app[app="corner-ribbon"] {
+  pointer-events: none;
+  position: fixed;
+}
+
+cloudflare-app[app="corner-ribbon"] .ribbon-content {
+  border: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+  box-sizing: border-box;
+  cursor: default;
+  height: 3em;
+  letter-spacing: .03em;
+  line-height: 1.1;
+  overflow: hidden;
+  padding: 1em 0;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transform-origin: 0 0;
+  white-space: nowrap;
+  width: 141.421356%; /* sqrt(2) */
+}
+
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href] {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href],
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href]:link,
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href]:hover,
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href]:active {
+  color: inherit;
+  outline: none;
+}
+
+cloudflare-app[app="corner-ribbon"] .ribbon-content[href]:hover {
+  opacity: .8;
+}
+
+cloudflare-app[app="corner-ribbon"][data-size="small"]  {
+  font-size: 0.85em;
+}
+
+cloudflare-app[app="corner-ribbon"][data-size="normal"] {
+  font-size: 1.00em;
+}
+
+cloudflare-app[app="corner-ribbon"][data-size="large"] {
+  font-size: 1.25em;
+}
+
+cloudflare-app[app="corner-ribbon"][data-size="huge"] {
+  font-size: 1.50em;
+}
+
+
+cloudflare-app[app="corner-ribbon"][data-position="top-left"] {
+  top: 0;
+  left: 0;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="top-right"] {
+  top: 0;
+  right: 0;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="bottom-left"] {
+  bottom: 0;
+  left: 0;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="bottom-right"] {
+  bottom: 0;
+  right: 0;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="top-left"] .ribbon-content {
+  transform: rotate(-45deg);
+  top: 100%;
+  left: -2.12132em;
+  margin-top: -2.12132em;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="top-right"] .ribbon-content {
+  transform: rotate(45deg);
+  left: 2.12132em;
+  top: -2.12132em;
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="bottom-left"] .ribbon-content {
+  transform: rotate(45deg);
+}
+
+cloudflare-app[app="corner-ribbon"][data-position="bottom-right"] .ribbon-content {
+  transform: rotate(-45deg);
+  top: 100%;
+}
